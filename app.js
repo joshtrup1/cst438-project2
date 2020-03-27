@@ -126,6 +126,18 @@ app.get("/lightsabers",isLoggedIn,(req,res)=> {
     console.log(req.user);
 });
 
+//add new item 
+app.get("/newItem",(req,res)=> {
+    res.render("newItem");
+    
+});
+
+//update item 
+app.get("/updateItem",(req,res)=> {
+    res.render("updateItem");
+    
+});
+
 
 //shopping cart
 app.get("/cart",(req,res)=> {
@@ -134,12 +146,12 @@ app.get("/cart",(req,res)=> {
 });
 
 app.get('/createLightsaber',(req,res)=> {
-    res.render("createLightsaber",{user:req.User});
+    res.render("newItem",{user:req.User});
     console.log("user is with us");
     console.log(req.user)
 });
 
-app.get('/updateLightsaber',(req,res)=> {
+app.get('/updateItem',(req,res)=> {
     res.render("updateLightsaber");
 
 });
@@ -161,6 +173,7 @@ router.get('/lightsaber',(req,res) => {
         res.send(err);
     })
 })
+
 router.post('/lightsaber',(req,res) => {
     Item.create(req.body)
     .then(function(newTodo) {
