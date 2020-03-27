@@ -126,6 +126,18 @@ app.get("/lightsabers",isLoggedIn,(req,res)=> {
     console.log(req.user);
 });
 
+//add new item 
+app.get("/newItem",(req,res)=> {
+    res.render("newItem");
+    
+});
+
+//update item 
+app.get("/updateItem",(req,res)=> {
+    res.render("updateItem");
+    
+});
+
 
 //shopping cart
 app.get("/cart",(req,res)=> {
@@ -161,6 +173,7 @@ router.get('/lightsaber',(req,res) => {
         res.send(err);
     })
 })
+
 router.post('/lightsaber',(req,res) => {
     Item.create(req.body)
     .then(function(newTodo) {
