@@ -235,6 +235,7 @@ img{
 .shopping-cart .content{
 	box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
 	background-color: white;
+	color: black;
 }
 
 .shopping-cart .block-heading{
