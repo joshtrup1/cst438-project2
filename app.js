@@ -5,6 +5,7 @@ var passport = require("passport");
 var bodyParser = require('body-parser');
 var localStrategy = require('passport-local');
 var passportLocalMongoose = require("passport-local-mongoose");
+var flash = require('connect-flash');
 var router = express.Router();
 //npm install ejs body-parser mongoose passport passport 
 var uri = "mongodb://sampop:Project2@cluster0-shard-00-00-hnxfk.mongodb.net:27017,cluster0-shard-00-01-hnxfk.mongodb.net:27017,cluster0-shard-00-02-hnxfk.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority";
@@ -121,11 +122,11 @@ app.get("/logout",(req,res)=> {
 
 //lightsabers
 
-app.get("/lightsabers",isLoggedIn,(req,res)=> {
-    res.render("lightsabers",{user: req.user});
+// app.get("/lightsabers",isLoggedIn,(req,res)=> {
+//     res.render("lightsabers",{user: req.user});
 
-    console.log(req.user);
-});
+//     console.log(req.user);
+// });
 
 //add new item 
 app.get("/newItem",(req,res)=> {
@@ -147,13 +148,14 @@ app.get("/cart",(req,res)=> {
 });
 
 app.get('/createLightsaber',(req,res)=> {
+    req.flash('')
     res.render("newItem",{user:req.User});
     console.log("user is with us");
     console.log(req.user)
 });
 
 app.get('/updateItem',(req,res)=> {
-    res.render("updateLightsaber");
+    res.render("updateItem");
 
 });
 
@@ -165,6 +167,7 @@ app.get('/deleteLightsaber',(req,res)=> {
 //API Routes============================
 
 app.get('/lightsaber',(req,res) => {
+    res.flash("username",req.user);
     Item.find()
     .then((items) => {
         res.json(items);
@@ -173,7 +176,8 @@ app.get('/lightsaber',(req,res) => {
     .catch((err) => {
         res.send(err);
     })
-    res.render("lighsabers",{items:items});
+    res.render("lighsabers",{items:items,user:req.user});
+    // res.render("lightsabers");
 })
 
 app.post('/lightsaber',(req,res) => {
