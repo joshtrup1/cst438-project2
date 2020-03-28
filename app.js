@@ -175,6 +175,20 @@ app.get('/lightsaber',isLoggedIn,(req,res) => {
     // res.render("lightsabers");
 })
 
+app.get('/lightsaber/:id',isLoggedIn,(req,res) => {
+    res.flash("username",req.user);
+    Item.find()
+    .then((items) => {
+        res.json(items);
+    
+    })
+    .catch((err) => {
+        res.send(err);
+    })
+    res.render("lighsabers",{items:items,user:req.user});
+    // res.render("lightsabers");
+})
+
 app.post('/lightsaber',(req,res) => {
     Item.create(req.body)
     .then(function(newTodo) {
