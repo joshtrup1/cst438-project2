@@ -1,8 +1,8 @@
 /* global $ */
 $(document).ready(function() {
 
-    $.getJSON("/api/userItemRoutes")
-    .then(addItems)
+    $.getJSON("/api/items")
+    .then(getItems)
 
     $("#addItem").on('click',function(event) {
         if(event.which == 13) {
@@ -28,7 +28,7 @@ $(document).ready(function() {
 function getItems() {
     $.ajax({
         method: 'GET',
-        url: 'api/userItemRoutes',
+        url: '/api/items',
         
     })
     .done((data) => {
@@ -39,7 +39,10 @@ function getItems() {
 function addItem(item) {
     var newItem = item.name;
     newItem.data('id',item._id);
-    newItem.data('completed',item.completed);
+    newItem.data('color',item.color);
+    newItem.data('price',item.price);
+    newItem.data('quantity',item.quantity);
+
     if(item.completed) {
         newItem.addClass("done");
     }
@@ -66,42 +69,29 @@ function createItem() {
     })
 }
 
-function removeItemFromCart(item) {
-    var clickedId = todo.data('id');
-    var deleterUrl = 'api/userItemRoutes/'+ clickedId;
-    var updateData = {$inc: {quantity: 1}};
+function removeItem(item) {
+    var clickedId = item.data('id');
+    var deleterUrl = 'api/items/'+ clickedId;
+    
     
     $.ajax({
         method: 'DELETE',
-        url: deleterUrl,
-        data: updateData
+        url: deleterUrl
     })
     .then((data) => {
         todo.remove();
     })
 }
-function addItemToCart(item) {
-    var clickedId = todo.data('id');
-    var deleterUrl = 'api/userItemRoutes/'+ clickedId;
-    var updateData = {$inc: {quantity: -1}};
-    
-    $.ajax({
-        method: 'DELETE',
-        url: deleterUrl,
-        data: updateData
-    })
-    .then((data) => {
-        todo.remove();
-    })
-}
-
-
 
 const updateItem = (item) => {
-    var updateUrl = 'api/userItemRoutes/'+ item.data('id');
-    var isDone = item.data('completed');
-    // console.log(isDone)
-    var updateData = {$inc: {quantity: 1}};
+    var updateUrl = 'api/items/'+ item.data('id');
+    // var isDone = item.data('completed');
+    // var itemID = newItem.data('id',item._id);
+    var itemColor = newItem.data('color',item.color);
+    var itemPrice = newItem.data('price',item.price);
+    var itemQuantity = newItem.data('quantity',item.quantity);
+
+    var updateData = {color: itemColor, price, itemPrice, quantity: itemQuantity};
     // console.log(updateData)
     $.ajax({
         method: 'PUT',
@@ -109,8 +99,23 @@ const updateItem = (item) => {
         data: updateData
 
     })
-    .then(function(updatedSelectedItem) {
+    .then(function(updateItem) {
         item.toggleClass("done");
     })
 
 }
+
+// function addItemToCart(item) {
+//     var clickedId = todo.data('id');
+//     var deleterUrl = 'api/userItemRoutes/'+ clickedId;
+//     var updateData = {$inc: {quantity: -1}};
+    
+//     $.ajax({
+//         method: 'DELETE',
+//         url: deleterUrl,
+//         data: updateData
+//     })
+//     .then((data) => {
+//         todo.remove();
+//     })
+// }

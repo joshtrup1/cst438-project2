@@ -14,6 +14,7 @@ mongoose.connect(uri,{useNewUrlParser: true, useUnifiedTopology: true });
 
 const app = express();
 
+var itemRoutes = require('./routes/item')
 //test
 
 
@@ -43,7 +44,7 @@ app.use(passport.session());
 app.get("/", function(req, res){
     res.render("index");
  });
-
+ app.use('/api/items',itemRoutes);
  
  //create account 
  app.get("/createAccount",(req,res)=> {
