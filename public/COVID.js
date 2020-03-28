@@ -5,9 +5,9 @@ $(document).ready(function() {
     .then(getItems)
 
     $("#addItem").on('click',function(event) {
-        if(event.which == 13) {
-            createTodo()
-        }
+        
+        createTodo()
+        
     });
 
     $('#RemoveItem').on('click',function() {
@@ -57,11 +57,16 @@ function addItems(item) {
 }
 
 function createItem() {
-    var newItem = $("#todoInput").val();
+    // alert($("input[name='user']").val());
+    var newItem = $("input[name='color']").val();
+    var newPrice = $("input[name='price']").val()
+    var newDescription = $("input[name='description']").val()
+    var newColor = $("input[name='color']").val()
     
-    $.post("api/userItemRoutes",{name: newItem})
+    
+    $.post("api/userItemRoutes",{color: newItem,descriptipn:newDescription,price: newPrice})
     .then(function(newTodo) {
-        $("#todoInput").val('');
+        $("input[name='color']").val('');
         addTodo(newItem);
     })
     .catch((err) => {
