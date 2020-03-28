@@ -135,23 +135,28 @@ app.get("/newItem",(req,res)=> {
     
 });
 
-app.post('/newItem', (req,res) => {
+
+
+app.post('/newItem', async (req,res) => {
     const item = new Item({
         color:req.body.color,
         price:req.body.price, 
         link:req.body.link
     })
-    item.save((err, newItem) => {
-        if(err) {
-            res.render('newItem', {
-                item: item,
-                errorMessage:'Error creating item'
-            })
-        } else {
-            res.redirect('lightsabers')
-        }
-    })
-    }) 
+    
+    try{
+        const newItem = await item.save()
+        res.redirect('lightsabers')
+    } catch {
+        res.render('newItem', {
+            item: item,
+            errorMessage:'Error creating item'
+        })
+    }
+    
+}) 
+
+
 
 //update item 
 app.get("/updateItem",(req,res)=> {
