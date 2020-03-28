@@ -123,6 +123,7 @@ app.get("/logout",(req,res)=> {
 
 app.get("/lightsabers",isLoggedIn,(req,res)=> {
     res.render("lightsabers",{user: req.user});
+
     console.log(req.user);
 });
 
@@ -163,7 +164,7 @@ app.get('/deleteLightsaber',(req,res)=> {
 
 //API Routes============================
 
-router.get('/lightsaber',(req,res) => {
+app.get('/lightsaber',(req,res) => {
     Item.find()
     .then((items) => {
         res.json(items);
@@ -172,9 +173,10 @@ router.get('/lightsaber',(req,res) => {
     .catch((err) => {
         res.send(err);
     })
+    res.render("lighsabers",{items:items});
 })
 
-router.post('/lightsaber',(req,res) => {
+app.post('/lightsaber',(req,res) => {
     Item.create(req.body)
     .then(function(newTodo) {
         // console.log(newTodo);
@@ -186,7 +188,7 @@ router.post('/lightsaber',(req,res) => {
     })
 })
 
-router.put('/lightsaber/:itemID',(req,res) => {
+app.put('/lightsaber/:itemID',(req,res) => {
     Item.findOneAndUpdate({_id: req.params.todoId},req.body,{new:true})
     .then((todo) => {
         res.json(todo);
@@ -196,7 +198,7 @@ router.put('/lightsaber/:itemID',(req,res) => {
     });
 });
 
-router.delete("/lightsaber/:itemID",(req,res) => {
+app.delete("/lightsaber/:itemID",(req,res) => {
     Item.remove({_id: req.params.todoId}).then(() => {
         res.json({message: "we deleted it"});
     })
