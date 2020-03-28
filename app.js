@@ -122,11 +122,6 @@ app.get("/logout",(req,res)=> {
 
 //lightsabers
 
-// app.get("/lightsabers",isLoggedIn,(req,res)=> {
-//     res.render("lightsabers",{user: req.user});
-
-//     console.log(req.user);
-// });
 
 //add new item 
 app.get("/newItem",(req,res)=> {
@@ -166,7 +161,7 @@ app.get('/deleteLightsaber',(req,res)=> {
 
 //API Routes============================
 
-app.get('/lightsaber',(req,res) => {
+app.get('/lightsaber',isLoggedIn,(req,res) => {
     res.flash("username",req.user);
     Item.find()
     .then((items) => {
