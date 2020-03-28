@@ -17,6 +17,8 @@ const app = express();
 
 
 var User = require('./models/user');
+var Item = require('./models/item');
+
 // var app = express();
 app.set('view engine', 'ejs');
 
@@ -27,6 +29,7 @@ app.use(require('express-session')({
     resave: false,
     saveUninitialized: false
 }));
+
 passport.use(new localStrategy(User.authenticate()))
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
@@ -126,11 +129,34 @@ app.get("/lightsabers",isLoggedIn,(req,res)=> {
     console.log(req.user);
 });
 
-//add new item 
+//new item 
 app.get("/newItem",(req,res)=> {
     res.render("newItem");
     
 });
+
+
+
+app.post('/newItem', async (req,res) => {
+    const item = new Item({
+        color:req.body.color,
+        price:req.body.price, 
+        link:req.body.link
+    })
+    
+    try{
+        const newItem = await item.save()
+        res.redirect('lightsabers')
+    } catch {
+        res.render('newItem', {
+            item: item,
+            errorMessage:'Error creating item'
+        })
+    }
+    
+}) 
+
+
 
 //update item 
 app.get("/updateItem",(req,res)=> {
@@ -160,6 +186,11 @@ app.get('/deleteLightsaber',(req,res)=> {
     res.render("updateLightsaber");
 
 });
+
+
+
+
+
 
 //API Routes============================
 
