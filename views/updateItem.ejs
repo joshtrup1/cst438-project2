@@ -6,22 +6,17 @@
     </head>
     <body>
 
-        <h1> Adding New Item </h1>
-        
-
+        <h1> Updating Item </h1>
+         
+        <!-- <h1> Enter new values below </h1> -->
         <form action="/updateItem" method="POST">
         <h2>
             
-            Color: <input type="text" name="color"
-                    value="<%= itemInfo[0].color %>"><br>    
-            Price: <input type="text" name="price"
-                    value="<%= itemInfo[0].price %>"><br>
-            Image Link:<input type="text" name="link"
-                    value="<%= itemInfo[0].imageLink %>"><br>
+            Color: <input type="text" name="color"><br>    
+            Price: <input type="text" name="price"><br>
+            Image Link:<input type="text" name="link"><br>
             
-            <input type="hidden" name="gender" value="<%= gender %>">
             
-            <input type="hidden" name="itemId" value="<%= itemInfo[0].uniqueId %>">
             <br><br>
             <button id="UpdateCurrentItem">Update Item</button>
         
