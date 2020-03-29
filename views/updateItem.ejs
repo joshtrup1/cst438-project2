@@ -1,33 +1,28 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title> </title>
-        <link rel="stylesheet" href="/css/styles.css"/>
-    </head>
-    <body>
+<%- include ("../partials/header") %>
 
-        <h1> Updating Item </h1>
-         
-        <!-- <h1> Enter new values below </h1> -->
-        <form action="/updateItem" method="POST">
-        <h2>
-            
-            Color: <input type="text" name="color"><br>    
-            Price: <input type="text" name="price"><br>
-            Image Link:<input type="text" name="link"><br>
-            
-            
-            <br><br>
-            <button id="UpdateCurrentItem">Update Item</button>
+        <h1> Update An Item </h1>
         
-            <%= typeof(message) != "undefined"?message:"" %>
-            
-        </h2>
-        </form>       
-        <form action="/lightsabers">
-          <h2><button id="back"> Back </button></h2>
-        </form>
-
+        <div style="text-align: center;">
+           <span style="margin:auto; display:table; border:1px;">
+                <img src="https://vignette.wikia.nocookie.net/starwars/images/7/7f/Solo.JPG/revision/latest/scale-to-width-down/250?cb=20060324175108" style="padding-left:10px;float:left;"> 
+                <i style="float:left; padding-left:10px;"> 
+                    <form action="/updateItem" method="POST">
+                        <h2>
+                            
+                            Color: <input type="text" name="color"><br>    
+                            Price: <input type="text" name="price"><br>
+                            Image URL:<input type="text" name="link"><br>
+                            
+                            <br>
+                            <button id="UpdateCurrentItem" class="myButton">Update Item</button>
+                        
+                            <%= typeof(message) != "undefined"?message:"" %>
+                            
+                        </h2>
+                    </form>  
+                </i>
+                <img src="https://vignette.wikia.nocookie.net/starwars/images/7/7a/Chewbacca_004.jpg/revision/latest/scale-to-width-down/210?cb=20101219044516" style="margin-left:10px;float:left;">
+            </span>            
+        </div>
         <script type="text/javascript" src="../public/COVID.js"></script>
-    </body>
-</html>
+ <%- include ("../partials/footer") %>

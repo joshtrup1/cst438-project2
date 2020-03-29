@@ -1,14 +1,52 @@
 /* global $ */
 $(document).ready(function() {
 
+    function parseSerializedInput(data) {
+        dataObj = {}
+        $(data).each(function(i, field){
+            dataObj[field.name] = field.value;
+          });
+          return dataObj;
+    }
+
     $(document).on('click','#deleteItem',function() {
         
         var id = $("#deleteItem").closest("div");
-        console.log($(this).parent());
+        // console.log($(this).parent());
         var clickParent = $(this).parent();
-        console.log(clickParent.children('#deleteItem').attr('class'));
-        // removeItem(clickParent);
+        // console.log(clickParent.children('#deleteItem').attr('class'));
+        removeItem(clickParent);
     });
+
+    $(document).on('click','#updateSelectedItem',function() {
+        
+        var updateInputValues = $("#inputValues").serializeArray()
+        dataObj = {};
+        $(updateInputValues).each(function(i, field){
+          dataObj[field.name] = field.value;
+        });
+        console.log(updateInputValues);
+        console.log(dataObj);
+        updateItem(dataObj);
+    });
+
+    $(document).on('click','#CreateNewItem',function() {
+        
+        var updateInputValues = $("#CreateInputValues").serializeArray()
+        // dataObj = {};
+
+        // $(updateInputValues).each(function(i, field){
+        //   dataObj[field.name] = field.value;
+        // });
+
+        var parseData = parseSerializedInput(updateInputValues)
+        console.log(parseData);
+        $("#confirm_creation").text("Item has been created");
+        createItem(parseData);
+
+    });
+
+    
 
     getItems();
 
@@ -61,22 +99,17 @@ function addItems(item) {
     });
 }
 
-function createItem() {
-    // alert($("input[name='user']").val());
-    // var newItem = $("input[name='color']").val();
-    var newPrice = $("input[name='price']").val()
-    var newDescription = $("input[name='description']").val()
-    var newColor = $("input[name='color']").val()
-    
-    
-    $.post("api/userItemRoutes",{color: newColor,descriptipn:newDescription,price: newPrice})
-    .then(function(newTodo) {
-        $("input[name='color']").val('');
-        addTodo(newItem);
+function createItem(item) {
+
+    $.ajax({
+        method: 'POST',
+        url: "/api/items",
+        data: item
     })
-    .catch((err) => {
-        console.log(err);
+    .then((data) => {
+        console.log("Item is Created");
     })
+
 }
 
 function removeItem(item) {
@@ -95,15 +128,16 @@ function removeItem(item) {
 }
 
 const updateItem = (item) => {
-    var updateUrl = 'api/items/'+ item.data('id');
-    // var isDone = item.data('completed');
-    // var itemID = newItem.data('id',item._id);
-    var itemColor = newItem.data('color',item.color);
-    var itemPrice = newItem.data('price',item.price);
-    var itemQuantity = newItem.data('quantity',item.quantity);
+    var updateUrl = '/api/items/' + item.id;
+    var itemName = item.name;
+    var itemColor = item.color;
+    var itemPrice = item.price;
+    var itemQuantity = item.quantity;
+    // console.log(item);
 
-    var updateData = {color: itemColor, price, itemPrice, quantity: itemQuantity};
+    var updateData = {name:itemName,color: itemColor, price: itemPrice, quantity: itemQuantity};
     // console.log(updateData)
+    console.log(updateData);
     $.ajax({
         method: 'PUT',
         url: updateUrl,
@@ -111,7 +145,7 @@ const updateItem = (item) => {
 
     })
     .then(function(updateItem) {
-        item.toggleClass("done");
+        console.log("Updated");
     })
 
 };
