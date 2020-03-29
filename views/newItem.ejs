@@ -9,7 +9,7 @@
         <h1> Adding New Item </h1>
         
 
-        <form action="/newItem" method="POST">
+        <form action="/newItem" method="POST" id="NewItemValues">
         <h2>
 
             <h3>Name: <input id="inputName" type="text" name="color"></h3><br>    
@@ -20,7 +20,7 @@
            
         
             <br><br>
-            <button id="addItem">Add Item</button>
+            <button id="CreateNewItem">Add Item</button>
         
             <%= typeof(message) != "undefined"?message:"" %>
         </h2>

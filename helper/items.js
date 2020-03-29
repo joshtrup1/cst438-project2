@@ -70,7 +70,7 @@ exports.getItemByColor = (req,res) => {
 };
 
 exports.addItemToUserCart = (req,res) => {
-    User.find({_id: req.params.userId}).then((user) => { 
+    User.findOneAndUpdate({_id: req.params.userId}).then((user) => { 
         Item.find({_id: req.params.itemId}).then((item) => {
             user.itemsInCart.push(item);
             res.json(user,item);
@@ -82,7 +82,7 @@ exports.addItemToUserCart = (req,res) => {
 };
 
 exports.removeItemFromCart = (req,res) => {
-    User.find({_id: req.params.userId}).then((user) => { 
+    User.findOneAndUpdate({_id: req.params.userId}).then((user) => { 
         Item.find({_id: req.params.itemId}).then((item) => {
             user.itemsInCart.pull(item);
             res.json({users:user,items:item});
