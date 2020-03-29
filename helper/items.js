@@ -1,5 +1,5 @@
-var Item = require("./models/item")
-// var User = require("./models/user")
+var Item = require("../models/item")
+
 
 exports.getItems = (req,res) => {
     Item.find()

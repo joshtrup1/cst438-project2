@@ -110,17 +110,3 @@ const updateItem = (item) => {
 
 }
 
-// function addItemToCart(item) {
-//     var clickedId = todo.data('id');
-//     var deleterUrl = 'api/userItemRoutes/'+ clickedId;
-//     var updateData = {$inc: {quantity: -1}};
-    
-//     $.ajax({
-//         method: 'DELETE',
-//         url: deleterUrl,
-//         data: updateData
-//     })
-//     .then((data) => {
-//         todo.remove();
-//     })
-// }

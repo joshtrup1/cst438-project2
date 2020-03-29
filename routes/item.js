@@ -10,7 +10,7 @@ router.route('/')
     .post(helpers.createItem)
 
 
-router.route('/:todoId')
+router.route('/:itemId')
     .get(helpers.getItemById)
     .put(helpers.updateItem)
     .delete(helpers.deleteItem)
