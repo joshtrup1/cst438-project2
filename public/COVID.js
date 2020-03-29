@@ -18,9 +18,9 @@ $(document).ready(function() {
         removeItem(clickParent);
     });
 
-    $(document).on('click','#updateSelectedItem',function() {
+    $(document).on('click','#UpdateCurrentItem',function() {
         
-        var updateInputValues = $("#inputValues").serializeArray()
+        var updateInputValues = $("#UpdateItemValues").serializeArray()
         dataObj = {};
         $(updateInputValues).each(function(i, field){
           dataObj[field.name] = field.value;
@@ -32,12 +32,8 @@ $(document).ready(function() {
 
     $(document).on('click','#CreateNewItem',function() {
         
-        var updateInputValues = $("#CreateInputValues").serializeArray()
-        // dataObj = {};
+        var updateInputValues = $("#NewItemValues").serializeArray()
 
-        // $(updateInputValues).each(function(i, field){
-        //   dataObj[field.name] = field.value;
-        // });
 
         var parseData = parseSerializedInput(updateInputValues)
         console.log(parseData);
@@ -58,9 +54,7 @@ function getItems() {
     $.ajax({
         method: 'GET',
         url: '/api/items',
-        //
-        //<a href='/campgrounds/" + element._id + "'>Delete<a/>
-        //<a href='/deleteLightsaber/" + element._id + "'>Delete<a/>
+        
     })
     .done((data) => {
         data.forEach((element,index) => {
