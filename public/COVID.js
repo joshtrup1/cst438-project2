@@ -1,27 +1,16 @@
 /* global $ */
 $(document).ready(function() {
 
-    $.getJSON("/api/items")
-    .then(getItems)
-
-    $("#addItem").on('click',function(event) {
-        
-        createTodo()
-        
+    $(document).on('click','#deleteItem',function() {
+        console.log();
+        // var clickedId = $(this).attr("id")
+        // console.log(clickedId);
+        removeItem($(this).parent());
     });
 
-    $('#RemoveItem').on('click',function() {
-        removeTodo($(this).parent())
-        
-    });
-    $('#UpdateCurrentItem').on('click',function() {
-        updateTodo($(this));
-        
-    });
-    $('#filterSearch').on('click',function() {
-        var items = getItems();
-        $("#display").append(items);
-    })
+    getItems();
+
+    
 
 });
 
@@ -29,10 +18,24 @@ function getItems() {
     $.ajax({
         method: 'GET',
         url: '/api/items',
-        
+        //
+        //<a href='/campgrounds/" + element._id + "'>Delete<a/>
+        //<a href='/deleteLightsaber/" + element._id + "'>Delete<a/>
     })
     .done((data) => {
-        console.log(data);
+        data.forEach((element,index) => {
+            var divItem = $("<div id='" + element._id + "'></div>");
+            var color = $("<p>color: " +element.color + "</p>");
+            var price = $("<p>$" + element.price + "</p>");
+            var updateBTN = $("<button><a href='/updateLightsaber/" + element._id + "'> Update </a></button></div>");
+            var deleteBTN = $("<button id='deleteItem'>delete </button></div>");
+            divItem.append(color,price,updateBTN,deleteBTN);
+            $('#display_items').append(divItem);
+        });
+        
+        
+        
+        // console.log(data);
     })
 }
 
@@ -58,13 +61,13 @@ function addItems(item) {
 
 function createItem() {
     // alert($("input[name='user']").val());
-    var newItem = $("input[name='color']").val();
+    // var newItem = $("input[name='color']").val();
     var newPrice = $("input[name='price']").val()
     var newDescription = $("input[name='description']").val()
     var newColor = $("input[name='color']").val()
     
     
-    $.post("api/userItemRoutes",{color: newItem,descriptipn:newDescription,price: newPrice})
+    $.post("api/userItemRoutes",{color: newColor,descriptipn:newDescription,price: newPrice})
     .then(function(newTodo) {
         $("input[name='color']").val('');
         addTodo(newItem);
@@ -75,16 +78,17 @@ function createItem() {
 }
 
 function removeItem(item) {
-    var clickedId = item.data('id');
-    var deleterUrl = 'api/items/'+ clickedId;
     
+    var deleterUrl = 'api/items/'+ item;
     
     $.ajax({
         method: 'DELETE',
         url: deleterUrl
     })
     .then((data) => {
-        todo.remove();
+        console.log(data);
+        item.remove();
+        data.remove();
     })
 }
 
@@ -108,5 +112,4 @@ const updateItem = (item) => {
         item.toggleClass("done");
     })
 
-}
-
+};
