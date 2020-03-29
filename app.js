@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var localStrategy = require('passport-local');
 var passportLocalMongoose = require("passport-local-mongoose");
 var router = express.Router();
+
 //npm install ejs body-parser mongoose passport passport 
 var uri = "mongodb://sampop:Project2@cluster0-shard-00-00-hnxfk.mongodb.net:27017,cluster0-shard-00-01-hnxfk.mongodb.net:27017,cluster0-shard-00-02-hnxfk.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority";
 var localHost = "mongodb://localhost:27017/Project2SamJoshEricRoy"
@@ -13,13 +14,13 @@ mongoose.connect(uri,{useNewUrlParser: true, useUnifiedTopology: true });
 
 const app = express();
 
-//test
+
 
 
 var User = require('./models/user');
 var Item = require('./models/item');
 
-// var app = express();
+
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended:true}));
@@ -41,23 +42,18 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-//home page
+// render home page
 app.get("/", function(req, res){
     res.render("index");
  });
 
  
- //create account 
- app.get("/createAccount",(req,res)=> {
-    res.render("createAccount");
-    
-});
-
+ // render create account page
 app.get('/createAccount', function(req,res) {
     res.render('createAccount'); 
 });
 
-
+// create new account 
 app.post("/createAccount",(req,res)=> {
     req.body.username;
     req.body.password;
@@ -129,14 +125,14 @@ app.get("/lightsabers",isLoggedIn,(req,res)=> {
     console.log(req.user);
 });
 
-//new item 
+//render new item page
 app.get("/newItem",(req,res)=> {
     res.render("newItem");
     
 });
 
 
-
+// create new item 
 app.post('/newItem', async (req,res) => {
     const item = new Item({
         color:req.body.color,
@@ -158,34 +154,47 @@ app.post('/newItem', async (req,res) => {
 
 
 
-//update item 
+//render update item page
 app.get("/updateItem",(req,res)=> {
     res.render("updateItem");
     
 });
 
 
-//shopping cart
+// render shopping cart page
 app.get("/cart",(req,res)=> {
     res.render("cart");
     
 });
 
-app.get('/createLightsaber',(req,res)=> {
-    res.render("newItem",{user:req.User});
-    console.log("user is with us");
-    console.log(req.user)
-});
 
-app.get('/updateItem',(req,res)=> {
-    res.render("updateLightsaber");
 
-});
 
-app.get('/deleteLightsaber',(req,res)=> {
-    res.render("updateLightsaber");
 
-});
+
+
+
+
+
+
+
+
+
+// app.get('/createLightsaber',(req,res)=> {
+//     res.render("newItem",{user:req.User});
+//     console.log("user is with us");
+//     console.log(req.user)
+// });
+
+// app.get('/updateItem',(req,res)=> {
+//     res.render("updateLightsaber");
+
+// });
+
+// app.get('/deleteLightsaber',(req,res)=> {
+//     res.render("updateLightsaber");
+
+// });
 
 
 
