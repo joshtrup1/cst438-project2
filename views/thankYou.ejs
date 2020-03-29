@@ -1,16 +1,14 @@
-<html>
-    <head>
-        <title>Thank You</title>
-        <link rel="stylesheet" href="/css/styles.css"/>
-    </head>
-    <body>
-        <br>
-        <nav>
-        <a href="/">Home</a>
-        <a href="/male">Mens</a>
-        <a href="/female">Womens</a>
-        <a href="/cart">Shopping Cart</a>
-	    </nav>
-        <h1>Thank You For Your Purchase!</h1>
+<%- include ("../partials/header") %>
+	    
+	    <main id="loginMain">
+            <figure id="me" >
+                <img src="https://www.yodaspeak.co.uk/yoda.png" />
+            </figure>
+            
+            <form id= "createAccountForm" action='/createAccount' method = "POST"> 
+                <h1>For your purchase thank you!  Hmmmmmm.</h1>
+            </form>
+        </main>
+
     </body>
 </html>

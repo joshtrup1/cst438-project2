@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<h1 >
-                <figure id="h1" >
-                    <img src="https://fontmeme.com/permalink/200312/e3ac6f4df0a4deaaf01a1a140fb7df8d.png" alt="Picture Of Wizard King" style="width:800px;height:50px;" />
-                </figure>
-            </h1>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+        
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   
+	<link rel="stylesheet" href="/public/css/styles.css"/>
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/css/styles.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script>
 		$(document).ready(function(){
@@ -48,13 +48,21 @@
     	});//ready
 	</script>
 </head>
-<body>
-	<nav>
-        <a href="/">Home</a>
-        <a href="/login">Login</a>
-        <a href="/lightsabers">Lightsabers</a>
-        <a href="/cart">Shopping Cart</a>
-	</nav>
+
+<body = "lo">
+            <div class="navbar">
+              <a href="/">Home</a>
+              <a href="/lightsabers">Inventory</a>
+              <a href="/cart"><i class="fa fa-shopping-cart" style="color:yellow"></i></a>
+            </div>
+                <h1 >
+                    <figure id="h1" >
+                        <img src="https://fontmeme.com/permalink/200312/e3ac6f4df0a4deaaf01a1a140fb7df8d.png" alt="Picture Of Wizard King" style="width:800px;height:50px;" />
+                    </figure>
+                </h1>
+            
+            <br />
+            <br>
 	<main class="page">
 	 	<section class="shopping-cart dark">
 	 		<div class="container">
@@ -70,7 +78,7 @@
 	        						<div class="product">
 					 					<div class="row">
 						 					<div class="col-md-3">
-						 						<img class="img-fluid mx-auto d-block image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRfH27ApqkX1t_4_bqhH6KEODMGmWaPswO-AVJLz1_kvbO4ntOm" style="width:100%"" >
+						 						<img class="img-fluid mx-auto d-block image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRfH27ApqkX1t_4_bqhH6KEODMGmWaPswO-AVJLz1_kvbO4ntOm" style="width:100%" >
 						 					</div>
 						 					<div class="col-md-8">
 						 						<div class="info">
@@ -104,7 +112,7 @@
 			 				<figure class="summary">
 			 					<h3>Summary</h3>
 			 					<figure class="summary-item"> Subtotal: <span id="totalPrice" class="price"> 0</span></figure>
-			 					<form action="/cartCheckout">
+			 					<form action="/thankYou">
 			 						<button class="btn btn-primary btn-lg btn-block">Checkout</button>
 			 					</form>
 				 			</figure>
