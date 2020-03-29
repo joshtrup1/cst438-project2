@@ -24,7 +24,7 @@ var itemRoutes = require('./routes/item')
 var User = require('./models/user');
 var Item = require('./models/item');
 
-
+app.use(flash());
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended:true}));
@@ -203,7 +203,7 @@ app.get('/deleteLightsaber',(req,res)=> {
 
 //API Routes============================
 
-app.get('/lightsaber',isLoggedIn,(req,res) => {
+app.get('/lightsabers',isLoggedIn,(req,res) => {
     res.flash("username",req.user);
     Item.find()
     .then((items) => {
