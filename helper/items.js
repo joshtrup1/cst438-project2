@@ -48,7 +48,7 @@ exports.updateItem = (req,res) => {
 };
 
 exports.deleteItem = (req,res) => {
-    Item.remove({_id: req.params.itemId}).then(() => {
+    Item.deleteOne({_id: req.params.itemId}).then(() => {
         res.json({message: "we deleted it"});
     })
     .catch((err) => {
