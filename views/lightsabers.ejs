@@ -3,8 +3,8 @@
         <title>Welcome! <%=user.username %> </title>
         <link rel="stylesheet" href="/css/styles.css"/>
         
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     </head>
     
 <body>
@@ -15,9 +15,11 @@
             </h1>
         </header>
         <hr/>
+        
         <title>Welcome! <%=user.username %> </title>
+        
         <nav>
-            <a href="/">Home</a>
+            <a href="/">Home:  <%=user.username %> </a>
             <a href="/createAccount">Create Account</a>
             <a href="/login">Login</a>
             <a href="/newItem">Add New Item</a>
@@ -41,11 +43,27 @@
           </div>    
     Filter Price: <input type="number" id="price" name="price" min="0.00" step="1">
     <button id="filterSearch" value="submit">Submit</button>
+    
+    <br>
+    <br>
+    
     <div id="display">
-
+        <ul id='movies-list'>
+            <%for(let i = 0; i <= 10; i++){%>
+    	        <li> 
+    	        <img class='poster' src="img/yellow.jpg">
+    	            <div>
+                        <h5>color</h5>
+                        <p>price</p>
+                        <button> Add to Cart </button>
+                        <br>
+                        <br>
+                    </div>
+    	        </li>	
+    	  <% } %>
+        <ul>
     </div>
-
-
+    
 </body>
 <script type="text/javascript" src="../public/app.js"></script>
 <script>
