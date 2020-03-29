@@ -2,10 +2,12 @@
 $(document).ready(function() {
 
     $(document).on('click','#deleteItem',function() {
-        console.log();
-        // var clickedId = $(this).attr("id")
-        // console.log(clickedId);
-        removeItem($(this).parent());
+        
+        var id = $("#deleteItem").closest("div");
+        console.log($(this).parent());
+        var clickParent = $(this).parent();
+        console.log(clickParent.children('#deleteItem').attr('class'));
+        // removeItem(clickParent);
     });
 
     getItems();
@@ -28,7 +30,7 @@ function getItems() {
             var color = $("<p>color: " +element.color + "</p>");
             var price = $("<p>$" + element.price + "</p>");
             var updateBTN = $("<button><a href='/updateLightsaber/" + element._id + "'> Update </a></button></div>");
-            var deleteBTN = $("<button id='deleteItem'>delete </button></div>");
+            var deleteBTN = $("<button class = '" + element._id + "' id='deleteItem'>delete </button></div>");
             divItem.append(color,price,updateBTN,deleteBTN);
             $('#display_items').append(divItem);
         });
@@ -78,8 +80,9 @@ function createItem() {
 }
 
 function removeItem(item) {
-    
-    var deleterUrl = 'api/items/'+ item;
+    var deleteID = item.children('#deleteItem').attr('class')
+    var deleterUrl = 'api/items/'+ deleteID;
+    console.log(item);
     
     $.ajax({
         method: 'DELETE',
@@ -88,7 +91,6 @@ function removeItem(item) {
     .then((data) => {
         console.log(data);
         item.remove();
-        data.remove();
     })
 }
 
