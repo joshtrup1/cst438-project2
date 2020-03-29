@@ -3,8 +3,8 @@
         <title>Welcome! <%=user.username %> </title>
         <link rel="stylesheet" href="/css/styles.css"/>
         
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     </head>
     
 <body>
@@ -15,9 +15,11 @@
             </h1>
         </header>
         <hr/>
+        
         <title>Welcome! <%=user.username %> </title>
+        
         <nav>
-            <a href="/">Home</a>
+            <a href="/">Home:  <%=user.username %> </a>
             <a href="/createAccount">Create Account</a>
             <a href="/login">Login</a>
             <a href="/newItem">Add New Item</a>
@@ -44,13 +46,16 @@
             <input type="number" id="price" name="price" min="0.00" step="1">
           </div>    
     <button id="filterSearch" value="submit">Submit</button>
+    
+    <br>
+    <br>
+    
     <div id="display">
-        
+
     </div>
-
-
+    
 </body>
-<script type="text/javascript" src="../public/app.js"></script>
+<script type="text/javascript" src="../public/COVID.js"></script>
 <script>
     /* When the user clicks on the button, 
     toggle between hiding and showing the dropdown content */
