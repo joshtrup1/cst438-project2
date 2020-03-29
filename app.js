@@ -263,11 +263,11 @@ app.get('/deleteLightsaber',(req,res)=> {
 // })
 
 
-// //SERVER PORT
-// const port = process.env.PORT || 3012; //new port server name 
+//SERVER PORT
+const port = process.env.PORT || 3012; //new port server name 
 
 
-// app.listen(port,process.env.IP,() => {
-//     console.log(`http://localhost:${port}`);
-// })
+app.listen(port,process.env.IP,() => {
+    console.log(`http://localhost:${port}`);
+})
 
