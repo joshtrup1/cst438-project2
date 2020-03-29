@@ -15,12 +15,10 @@ mongoose.connect(uri,{useNewUrlParser: true, useUnifiedTopology: true });
 
 const app = express();
 
-<<<<<<< HEAD
+
 var itemRoutes = require('./routes/item')
 //test
-=======
 
->>>>>>> 92542f457f1b423c59f9a54250cd44dd815c1345
 
 
 var User = require('./models/user');
@@ -169,7 +167,7 @@ app.get("/cart",(req,res)=> {
     
 });
 
-<<<<<<< HEAD
+
 app.get('/createLightsaber',(req,res)=> {
     req.flash('')
     res.render("newItem",{user:req.User});
@@ -179,9 +177,7 @@ app.get('/createLightsaber',(req,res)=> {
 
 app.get('/updateItem',(req,res)=> {
     res.render("updateItem");
-=======
 
->>>>>>> 92542f457f1b423c59f9a54250cd44dd815c1345
 
 
 
@@ -284,5 +280,4 @@ const port = process.env.PORT || 3012; //new port server name
 app.listen(port,process.env.IP,() => {
     console.log(`http://localhost:${port}`);
 })
-
 
