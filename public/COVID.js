@@ -1,6 +1,29 @@
 /* global $ */
 $(document).ready(function() {
 
+    //Create
+    $(document).on('click','#createItem',function() {
+        var newName = $('#inputName').val();
+        var newColor = $('#inputName').val();
+        var newPrice = $('#inputName').val();
+        var newDescription = $('#inputName').val();
+        createItem(newName,newColor,newPrice,newDescription);
+    });
+
+    //Read
+    getItems();
+    
+    //Update 
+    $(document).on('click','#updateItemValues',function() {
+        var values = $("#UpdateFormValues").serialize();
+        console.log($(this).parent());
+        var clickParent = $(this).parent();
+        console.log(clickParent.children('#deleteItem').attr('class'));
+        // updateItem(values);
+
+    });
+
+    //Delete
     $(document).on('click','#deleteItem',function() {
         
         var id = $("#deleteItem").closest("div");
@@ -10,7 +33,7 @@ $(document).ready(function() {
         // removeItem(clickParent);
     });
 
-    getItems();
+    
 
     
 
@@ -61,15 +84,14 @@ function addItems(item) {
     });
 }
 
-function createItem() {
+function createItem(newName,newColor,newPrice,newDescription) {
     // alert($("input[name='user']").val());
     // var newItem = $("input[name='color']").val();
-    var newPrice = $("input[name='price']").val()
-    var newDescription = $("input[name='description']").val()
-    var newColor = $("input[name='color']").val()
+    // var newPrice = $("input[name='price']").val()
+    // var newDescription = $("input[name='description']").val()
+    // var newColor = $("input[name='color']").val()
     
-    
-    $.post("api/userItemRoutes",{color: newColor,descriptipn:newDescription,price: newPrice})
+    $.post("api/userItemRoutes",{name: newName, color: newColor, descriptipn:newDescription, price: newPrice})
     .then(function(newTodo) {
         $("input[name='color']").val('');
         addTodo(newItem);
