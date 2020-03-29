@@ -1,5 +1,7 @@
 var Item = require("../models/item")
 
+var User = require("../models/user")
+
 
 exports.getItems = (req,res) => {
     Item.find()
@@ -26,7 +28,7 @@ exports.createItem = (req,res) => {
 };
 
 exports.getItemById = (req,res) => {
-    Item.find()
+    Item.find({_id: req.params.itemId})
     .then((items) => {
         res.json(items);
     
@@ -55,5 +57,41 @@ exports.deleteItem = (req,res) => {
         res.send(err);
     });
 };
+
+//Search Query
+
+exports.getItemByColor = (req,res) => {
+    Item.find({color: req.params.color}).then(() => {
+        res.json(items);
+    })
+    .catch((err) => {
+        res.send(err);
+    });
+};
+
+exports.addItemToUserCart = (req,res) => {
+    User.findOneAndUpdate({_id: req.params.userId}).then((user) => { 
+        Item.find({_id: req.params.itemId}).then((item) => {
+            user.itemsInCart.push(item);
+            res.json(user,item);
+        })
+        .catch((err) => {
+            res.send(err);
+        });
+    });
+};
+
+exports.removeItemFromCart = (req,res) => {
+    User.findOneAndUpdate({_id: req.params.userId}).then((user) => { 
+        Item.find({_id: req.params.itemId}).then((item) => {
+            user.itemsInCart.pull(item);
+            res.json({users:user,items:item});
+        })
+        .catch((err) => {
+            res.send(err);
+        });
+    });
+};
+
 
 module.exports = exports;
