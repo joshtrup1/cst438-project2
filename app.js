@@ -197,6 +197,10 @@ app.get('/deleteLightsaber',(req,res)=> {
 });
 
 
+app.get('/thankYou',(req,res)=> {
+    res.render("thankYou");
+
+});
 
 
 
@@ -204,8 +208,8 @@ app.get('/deleteLightsaber',(req,res)=> {
 //API Routes============================
 
 app.get('/lightsabers',isLoggedIn,(req,res) => {
-    res.flash("username",req.user);
-    Item.find()
+    req.flash("username",req.user);
+    let items = Item.find()
     .then((items) => {
         res.json(items);
     
@@ -213,23 +217,23 @@ app.get('/lightsabers',isLoggedIn,(req,res) => {
     .catch((err) => {
         res.send(err);
     })
-    res.render("lighsabers",{items:items,user:req.user});
+    res.render("lightsabers",{item:items,user:req.user});
     // res.render("lightsabers");
 })
 
-app.get('/lightsaber/:id',isLoggedIn,(req,res) => {
-    res.flash("username",req.user);
-    Item.find()
-    .then((items) => {
-        res.json(items);
+// app.get('/lightsaber/:id',isLoggedIn,(req,res) => {
+//     res.flash("username",req.user);
+//     Item.find()
+//     .then((items) => {
+//         res.json(items);
     
-    })
-    .catch((err) => {
-        res.send(err);
-    })
-    res.render("lighsabers",{items:items,user:req.user});
-    // res.render("lightsabers");
-})
+//     })
+//     .catch((err) => {
+//         res.send(err);
+//     })
+//     res.render("lighsabers",{items:items,user:req.user});
+//     // res.render("lightsabers");
+// })
 
 app.post('/lightsaber',(req,res) => {
     Item.create(req.body)

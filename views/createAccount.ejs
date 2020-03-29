@@ -1,28 +1,4 @@
-
-
-<!DOCTYPE html>
-<html>
-    <head>
-        <title> Create Account </title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <link rel="stylesheet" href="/css/styles.css"/>
-    </head>
-    
-    <body id = "lo">
-        <h1 >
-            <figure id="h1" >
-                <img src="https://fontmeme.com/permalink/200312/e3ac6f4df0a4deaaf01a1a140fb7df8d.png" alt="Picture Of Wizard King" style="width:800px;height:50px;" />
-            </figure>
-        </h1>
-        
-        <nav>
-            <a href="/">Home </a>
-            <a href="/createAccount">Create Account</a>
-            <a href="/login">Login</a>
-            <a href="/lightsabers">Lightsabers</a>
-            <a href="/cart">Shopping Cart</a>
-        </nav>
-        <br />
+<%- include ("../partials/header") %>
         
         <br>
 
@@ -32,11 +8,9 @@
             </figure>
             
             <form id= "createAccountForm" action='/createAccount' method = "POST"> 
-                Username: <input type="text" name="username" placeholder="username"/><br>
-                Password: <input type="password" placeholder="password" name="password"/><br><br>
+                Username: <input type="text" name="username" placeholder="username" required/><br>
+                Password: <input type="password" placeholder="password" name="password" required/><br><br>
                 <button class="myButton">Create Account!</button>
-                <br><br>
-                <button class="myButton" id="back">Go Back</button>
             </form>
         </main>
 
@@ -44,11 +18,7 @@
             <button>Logout</button>
             
     
-    </body>
-</html>
-
-
-
+ <%- include ("../partials/footer") %>
 
 
 
