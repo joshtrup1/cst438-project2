@@ -154,6 +154,9 @@ app.post('/newItem', async (req,res) => {
 
 
 
+
+
+
 //render update item page
 app.get("/updateItem",(req,res)=> {
     res.render("updateItem");
@@ -235,17 +238,17 @@ app.get('/lightsabers',isLoggedIn,(req,res) => {
 //     // res.render("lightsabers");
 // })
 
-app.post('/lightsaber',(req,res) => {
-    Item.create(req.body)
-    .then(function(newTodo) {
-        // console.log(newTodo);
-        res.status(201).json(newTodo);
-        console.log("Done");
-    })
-    .catch((err) => {
-        res.send(err);
-    })
-})
+// app.post('/lightsaber',(req,res) => {
+//     Item.create(req.body)
+//     .then(function(newTodo) {
+//         // console.log(newTodo);
+//         res.status(201).json(newTodo);
+//         console.log("Done");
+//     })
+//     .catch((err) => {
+//         res.send(err);
+//     })
+// })
 
 app.put('/lightsaber/:itemID',(req,res) => {
     Item.findOneAndUpdate({_id: req.params.todoId},req.body,{new:true})
