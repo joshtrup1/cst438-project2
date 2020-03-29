@@ -78,6 +78,17 @@ app.post("/createAccount",(req,res)=> {
     });
 });
 
+app.get("/search",(req,res) => {
+    Item.find(req.query,(err,item) => {
+        if(err) {
+            console.log(err);
+        }
+        res.json(item)
+        console.log(item)
+        
+    });
+
+})
 
 //login
 

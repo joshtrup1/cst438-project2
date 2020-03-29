@@ -15,9 +15,13 @@ router.route('/:itemId')
     .put(helpers.updateItem)
     .delete(helpers.deleteItem)
 
-router.route('/:userId')
-    .put(helpers.addItemToUserCart)
-    .put(helpers.removeItemFromCart)
+router.route('/user')
+    .get(helpers.getUsers)
+
+router.route('/user/:userId')
+    .get(helpers.getUserById)
+
+
 
 
 module.exports = router;
