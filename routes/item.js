@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 // var db = require('../models');
-var helpers = require('../helpers/item');
+var helpers = require('../helper/items');
 
 
 
