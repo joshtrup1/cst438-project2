@@ -178,33 +178,23 @@ app.get('/createLightsaber',(req,res)=> {
 app.get('/updateItem',(req,res)=> {
     res.render("updateItem");
 
+});
 
+app.get('/createLightsaber',(req,res)=> {
+    res.render("newItem",{user:req.User});
+    console.log("user is with us");
+    console.log(req.user)
+});
 
+app.get('/updateItem',(req,res)=> {
+    res.render("updateLightsaber");
 
+});
 
+app.get('/deleteLightsaber',(req,res)=> {
+    res.render("updateLightsaber");
 
-
-
-
-
-
-
-
-// app.get('/createLightsaber',(req,res)=> {
-//     res.render("newItem",{user:req.User});
-//     console.log("user is with us");
-//     console.log(req.user)
-// });
-
-// app.get('/updateItem',(req,res)=> {
-//     res.render("updateLightsaber");
-
-// });
-
-// app.get('/deleteLightsaber',(req,res)=> {
-//     res.render("updateLightsaber");
-
-// });
+});
 
 
 
@@ -213,71 +203,71 @@ app.get('/updateItem',(req,res)=> {
 
 //API Routes============================
 
-app.get('/lightsaber',isLoggedIn,(req,res) => {
-    res.flash("username",req.user);
-    Item.find()
-    .then((items) => {
-        res.json(items);
+// app.get('/lightsaber',isLoggedIn,(req,res) => {
+//     res.flash("username",req.user);
+//     Item.find()
+//     .then((items) => {
+//         res.json(items);
     
-    })
-    .catch((err) => {
-        res.send(err);
-    })
-    res.render("lighsabers",{items:items,user:req.user});
-    // res.render("lightsabers");
-})
+//     })
+//     .catch((err) => {
+//         res.send(err);
+//     })
+//     res.render("lighsabers",{items:items,user:req.user});
+//     // res.render("lightsabers");
+// })
 
-app.get('/lightsaber/:id',isLoggedIn,(req,res) => {
-    res.flash("username",req.user);
-    Item.find()
-    .then((items) => {
-        res.json(items);
+// app.get('/lightsaber/:id',isLoggedIn,(req,res) => {
+//     res.flash("username",req.user);
+//     Item.find()
+//     .then((items) => {
+//         res.json(items);
     
-    })
-    .catch((err) => {
-        res.send(err);
-    })
-    res.render("lighsabers",{items:items,user:req.user});
-    // res.render("lightsabers");
-})
+//     })
+//     .catch((err) => {
+//         res.send(err);
+//     })
+//     res.render("lighsabers",{items:items,user:req.user});
+//     // res.render("lightsabers");
+// })
 
-app.post('/lightsaber',(req,res) => {
-    Item.create(req.body)
-    .then(function(newTodo) {
-        // console.log(newTodo);
-        res.status(201).json(newTodo);
-        console.log("Done");
-    })
-    .catch((err) => {
-        res.send(err);
-    })
-})
+// app.post('/lightsaber',(req,res) => {
+//     Item.create(req.body)
+//     .then(function(newTodo) {
+//         // console.log(newTodo);
+//         res.status(201).json(newTodo);
+//         console.log("Done");
+//     })
+//     .catch((err) => {
+//         res.send(err);
+//     })
+// })
 
-app.put('/lightsaber/:itemID',(req,res) => {
-    Item.findOneAndUpdate({_id: req.params.todoId},req.body,{new:true})
-    .then((todo) => {
-        res.json(todo);
-    })
-    .catch((err) => {
-        res.send(err);
-    });
-});
+// app.put('/lightsaber/:itemID',(req,res) => {
+//     Item.findOneAndUpdate({_id: req.params.todoId},req.body,{new:true})
+//     .then((todo) => {
+//         res.json(todo);
+//     })
+//     .catch((err) => {
+//         res.send(err);
+//     });
+// });
 
-app.delete("/lightsaber/:itemID",(req,res) => {
-    Item.remove({_id: req.params.todoId}).then(() => {
-        res.json({message: "we deleted it"});
-    })
-    .catch((err) => {
-        res.send(err);
-    });
-})
-
-
-//SERVER PORT
-const port = process.env.PORT || 3012; //new port server name 
+// app.delete("/lightsaber/:itemID",(req,res) => {
+//     Item.remove({_id: req.params.todoId}).then(() => {
+//         res.json({message: "we deleted it"});
+//     })
+//     .catch((err) => {
+//         res.send(err);
+//     });
+// })
 
 
-app.listen(port,process.env.IP,() => {
-    console.log(`http://localhost:${port}`);
-})
+// //SERVER PORT
+// const port = process.env.PORT || 3012; //new port server name 
+
+
+// app.listen(port,process.env.IP,() => {
+//     console.log(`http://localhost:${port}`);
+// })
 
