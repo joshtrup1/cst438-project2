@@ -84,6 +84,7 @@ function getItems() {
 }
 
 function getItemsBySearch(searchItems) {
+    $('#displaySearchResult').empty()
     var searchURL = "/api/items/search?" + searchItems;
     $.ajax({
         method: 'GET',
