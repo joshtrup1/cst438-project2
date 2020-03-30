@@ -91,17 +91,42 @@ app.get("/search",(req,res) => {
 })
 
 app.get("/addToCart/:itemId",(req,res) => {
-    Item.find(req.query,(err,item) => {
+    let userData = flashUserData();
+    User.findById(userData._id,(err,user) => {
         if(err) {
-            console.log(err);
+            console.log(err)
         }
-        res.json(item)
-        console.log(item)
-        
-    });
-
+        Item.find(req.params.itemId,(err,item) => {
+            if(err) {
+                console.log(err);
+            }
+            user.itemsInCart.push(item);
+            res.json(item)
+            console.log(item)
+            
+        });
+    })
 })
 
+app.get("/removeFromCart/:itemId",(req,res) => {
+
+    let userData = flashUserData();
+    User.findById(userData._id,(err,user) => {
+        if(err) {
+            console.log(err)
+        }
+        Item.find(req.params.itemId,(err,item) => {
+            if(err) {
+                console.log(err);
+            }
+            user.itemsInCart.push(item);
+            res.json(item)
+            console.log(item)
+            
+        });
+    })
+
+})
 
 //login
 
@@ -176,26 +201,24 @@ app.post('/newItem', async (req,res) => {
     
 }) 
 
-
-
-
-
-
 //render update item page
 app.get("/updateItem",(req,res)=> {
-    res.render("updateItem");
+    var userData = flashUserData()
+    res.render("updateItem",{user,userData});
     
 });
 
 
 // render shopping cart page
 app.get("/cart",(req,res)=> {
-    res.render("cart");
+    var userData = flashUserData()
+    res.render("cart",{user,userData});
     
 });
 // render update item page
 app.get('/updateItem',(req,res)=> {
-    res.render("updateItem");
+    var userData = flashUserData()
+    res.render("updateItem",{user:userData});
 
 });
 
@@ -205,60 +228,20 @@ app.get('/thankYou',(req,res)=> {
 
 });
 
-
-
-
-
-
-
-// app.get('/createLightsaber',(req,res)=> {
-//     req.flash('')
-//     res.render("newItem",{user:req.User});
-//     console.log("user is with us");
-//     console.log(req.user)
-// });
-
-
-
-// app.get('/createLightsaber',(req,res)=> {
-//     res.render("newItem",{user:req.User});
-//     console.log("user is with us");
-//     console.log(req.user)
-// });
-
-
-
-// app.get('/deleteLightsaber',(req,res)=> {
-//     res.render("updateItem");
-
-// });
-
-
-
-
+function flashUserData() {
+    let userData = req.flash('username');
+    let parsedUserData = JSON.parse(JSON.stringify(userData[0]))
+    return parsedUserData;
+}
 
 
 
 // Routes============================
 
-app.get('/lightsabers',isLoggedIn,(req,res) => {
-    req.flash("username",req.user);
+// app.get('/lightsabers',isLoggedIn,(req,res) => {
+//     req.flash("username",req.user);
     
-    let items = Item.find()
-    .then((items) => {
-        res.json(items);
-    
-    })
-    .catch((err) => {
-        res.send(err);
-    })
-    res.render("lightsabers",{item:items,user:req.user});
-    // res.render("lightsabers");
-})
-
-// app.get('/lightsaber/:id',isLoggedIn,(req,res) => {
-//     res.flash("username",req.user);
-//     Item.find()
+//     let items = Item.find()
 //     .then((items) => {
 //         res.json(items);
     
@@ -266,40 +249,29 @@ app.get('/lightsabers',isLoggedIn,(req,res) => {
 //     .catch((err) => {
 //         res.send(err);
 //     })
-//     res.render("lighsabers",{items:items,user:req.user});
+//     res.render("lightsabers",{item:items,user:req.user});
 //     // res.render("lightsabers");
 // })
 
-// app.post('/lightsaber',(req,res) => {
-//     Item.create(req.body)
-//     .then(function(newTodo) {
-//         // console.log(newTodo);
-//         res.status(201).json(newTodo);
-//         console.log("Done");
+// app.put('/lightsaber/:itemID',(req,res) => {
+    
+//     Item.findOneAndUpdate({_id: req.params.todoId},req.body,{new:true})
+//     .then((todo) => {
+//         res.json(todo);
 //     })
 //     .catch((err) => {
 //         res.send(err);
+//     });
+// });
+
+// app.delete("/lightsaber/:itemID",(req,res) => {
+//     Item.remove({_id: req.params.todoId}).then(() => {
+//         res.json({message: "we deleted it"});
 //     })
+//     .catch((err) => {
+//         res.send(err);
+//     });
 // })
-
-app.put('/lightsaber/:itemID',(req,res) => {
-    Item.findOneAndUpdate({_id: req.params.todoId},req.body,{new:true})
-    .then((todo) => {
-        res.json(todo);
-    })
-    .catch((err) => {
-        res.send(err);
-    });
-});
-
-app.delete("/lightsaber/:itemID",(req,res) => {
-    Item.remove({_id: req.params.todoId}).then(() => {
-        res.json({message: "we deleted it"});
-    })
-    .catch((err) => {
-        res.send(err);
-    });
-})
 
 
 //SERVER PORT
