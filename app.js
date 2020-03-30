@@ -211,14 +211,16 @@ app.get("/updateItem",(req,res)=> {
 
 
 // render shopping cart page
-app.get("/cart",(req,res)=> {
-    var userData = flashUserData()
-    res.render("cart",{user,userData});
+app.get("/cart",isLoggedIn,(req,res)=> {
+    let userData = req.flash('username');
+    let parsedUserData = JSON.parse(JSON.stringify(userData[0]))
+    res.render("cart",{user:parsedUserData});
     
 });
 // render update item page
 app.get('/updateItem',(req,res)=> {
-    var userData = flashUserData()
+    let userData = req.flash('username');
+    let parsedUserData = JSON.parse(JSON.stringify(userData[0]))
     res.render("updateItem",{user:userData});
 
 });
@@ -245,11 +247,11 @@ app.get('/thankYou',(req,res)=> {
 
 });
 
-function flashUserData() {
-    let userData = req.flash('username');
-    let parsedUserData = JSON.parse(JSON.stringify(userData[0]))
-    return parsedUserData;
-}
+// function flashUserData() {
+//     let userData = req.flash('username');
+//     let parsedUserData = JSON.parse(JSON.stringify(userData[0]))
+//     return parsedUserData;
+
 
 
 
@@ -267,6 +269,53 @@ app.get('/lightsabers',isLoggedIn,(req,res) => {
     })
     res.render("lightsabers",{item:items,user:req.user});
     // res.render("lightsabers");
+})
+
+//ADD to cart 
+
+app.get("/addItemToCart/:itemId",(req,res) => {
+    var userData = flashUserData();
+    console.log(userData)
+    User.findById(userData._id,(err,user) => {
+        if(err) {
+            console.log(err)
+        }
+        else {
+           Item.findById(req.params.itemId,(err,item) => {
+               if(err) {
+                   console.log(err)
+               } else {
+                   user.itemsInCart.push(item)
+                   res.json({message:"Item Added to cart"})
+               }
+           }) 
+        }
+
+    })
+
+})
+
+app.get("/removeFromCart/:itemId",(req,res) => {
+    var userData = flashUserData();
+    console.log(userData)
+    User.findById(userData._id,(err,user) => {
+        if(err) {
+            console.log(err)
+        }
+        else {
+           Item.findById(req.params.itemId,(err,item) => {
+               if(err) {
+                   console.log(err)
+               } else {
+                   user.itemsInCart.pull(item)
+                   res.json({message:"Item removed from cart"})
+               }
+
+           }) 
+        }
+
+    })
+
 })
 
 
