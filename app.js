@@ -253,6 +253,7 @@ function flashUserData() {
 
 
 
+
 app.get('/lightsabers',isLoggedIn,(req,res) => {
     req.flash("username",req.user);
     
@@ -314,6 +315,7 @@ app.get("/removeFromCart/:itemId",(req,res) => {
     })
 
 })
+
 
 
 
