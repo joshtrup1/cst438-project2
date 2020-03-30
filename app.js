@@ -277,7 +277,7 @@ app.get("/addItemToCart/:itemId",(req,res) => {
     let userData = req.flash('username');
     let parsedUserData = JSON.parse(JSON.stringify(userData[0]))
     console.log(userData)
-    User.findById(userData._id,(err,user) => {
+    User.findById(parsedUserData._id,(err,user) => {
         if(err) {
             console.log(err)
         }
@@ -288,6 +288,7 @@ app.get("/addItemToCart/:itemId",(req,res) => {
                } else {
                    user.itemsInCart.push(item)
                    res.json({message:"Item Added to cart"})
+                   res.render("/lightsabers")
                }
            }) 
         }
@@ -297,9 +298,10 @@ app.get("/addItemToCart/:itemId",(req,res) => {
 })
 
 app.get("/removeFromCart/:itemId",(req,res) => {
-    var userData = flashUserData();
+    let userData = req.flash('username');
+    let parsedUserData = JSON.parse(JSON.stringify(userData[0]))
     console.log(userData)
-    User.findById(userData._id,(err,user) => {
+    User.findById(parsedUserData._id,(err,user) => {
         if(err) {
             console.log(err)
         }
