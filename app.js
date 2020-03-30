@@ -211,14 +211,16 @@ app.get("/updateItem",(req,res)=> {
 
 
 // render shopping cart page
-app.get("/cart",(req,res)=> {
-    var userData = flashUserData()
-    res.render("cart",{user,userData});
+app.get("/cart",isLoggedIn,(req,res)=> {
+    let userData = req.flash('username');
+    let parsedUserData = JSON.parse(JSON.stringify(userData[0]))
+    res.render("cart",{user:parsedUserData});
     
 });
 // render update item page
 app.get('/updateItem',(req,res)=> {
-    var userData = flashUserData()
+    let userData = req.flash('username');
+    let parsedUserData = JSON.parse(JSON.stringify(userData[0]))
     res.render("updateItem",{user:userData});
 
 });
@@ -245,11 +247,11 @@ app.get('/thankYou',(req,res)=> {
 
 });
 
-function flashUserData() {
-    let userData = req.flash('username');
-    let parsedUserData = JSON.parse(JSON.stringify(userData[0]))
-    return parsedUserData;
-}
+// function flashUserData() {
+//     let userData = req.flash('username');
+//     let parsedUserData = JSON.parse(JSON.stringify(userData[0]))
+//     return parsedUserData;
+
 
 
 
