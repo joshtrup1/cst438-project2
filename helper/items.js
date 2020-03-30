@@ -1,7 +1,5 @@
 var Item = require("../models/item")
-
 var User = require("../models/user")
-
 
 exports.getItems = (req,res) => {
     Item.find()
@@ -28,7 +26,7 @@ exports.createItem = (req,res) => {
 };
 
 exports.getItemById = (req,res) => {
-    Item.find({_id: req.params.itemId})
+    Item.findById(req.params.itemId)
     .then((items) => {
         res.json(items);
     
@@ -51,29 +49,35 @@ exports.updateItem = (req,res) => {
 
 exports.deleteItem = (req,res) => {
     Item.deleteOne({_id: req.params.itemId}).then(() => {
-        res.json({message: "we deleted it"});
+        res.json({message: "items with id has been deleted"});
     })
     .catch((err) => {
         res.send(err);
     });
 };
 
-//Search Query
-
-exports.getItemByColor = (req,res) => {
-    Item.find({color: req.params.color}).then(() => {
-        res.json(items);
-    })
-    .catch((err) => {
-        res.send(err);
-    });
-};
 exports.getUsers = (req,res) => {
     User.find().then((users) => {
         res.json(users);
     })
     .catch((err) => {
         res.send(err);
+    });
+};
+
+exports.getBySearch = (req,res) => {
+    // { title: { $eq: title } }
+    let result = req.query
+    Item.find({color: req.query.color,price:req.query.price}).exec((err,item) => {
+        if(err) {
+            res.json({
+                status:"error",
+                data:err
+            })
+        }
+        else {
+            res.json(item)
+        }
     });
 };
 
@@ -87,27 +91,14 @@ exports.getUserById = (req,res) => {
     });
 };
 
-exports.addItemToUserCart = (req,res) => {
-    User.findOneAndUpdate({_id: req.params.userId}).then((user) => { 
-        Item.find({_id: req.params.itemId}).then((item) => {
-            user.itemsInCart.push(item);
-            res.json(user,item);
-        })
-        .catch((err) => {
-            res.send(err);
-        });
-    });
-};
 
-exports.removeItemFromCart = (req,res) => {
-    User.findOneAndUpdate({_id: req.params.userId}).then((user) => { 
-        Item.find({_id: req.params.itemId}).then((item) => {
-            user.itemsInCart.pull(item);
-            res.json({users:user,items:item});
-        })
-        .catch((err) => {
-            res.send(err);
-        });
+exports.addItemToUsersCart = (req,res) => {
+    User.findByIdAndUpdate(req.params.userId).then((user) => {
+        user.itemsInCart.push(req.params.itemId)
+        res.json(user);
+    })
+    .catch((err) => {
+        res.send(err);
     });
 };
 
