@@ -1,7 +1,7 @@
 <%- include ("../partials/header") %>
 
         <form action="/search">    
-        <h2>Filter Color:</h2>
+        <h3>Filter Color:</h3>
             <select name="color" class="selectpicker" id="colorSelector">
               <option value="yellow">Yellow</option>
               <option value="red">Red</option>
@@ -11,7 +11,7 @@
               <option value="orange">Orange</option>
               <option value="chrome">Chrome</option>
             </select>
-            <h2>Filter Price</h2>
+            <h3>Filter Price</h3>
             <input type="number" id="price" name="price" min="0.00" step="1">
  
         <button id="filterSearch" value="submit">Submit</button>
