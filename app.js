@@ -282,8 +282,8 @@ app.get("/addItemToCart/:itemId",(req,res) => {
                    console.log(err)
                } else {
                    user.itemsInCart.push(item)
+                   res.json({message:"Item Added to cart"})
                }
-
            }) 
         }
 
@@ -304,6 +304,7 @@ app.get("/addItemToCart/:itemId",(req,res) => {
                    console.log(err)
                } else {
                    user.itemsInCart.pull(item)
+                   res.json({message:"Item removed from cart"})
                }
 
            }) 
