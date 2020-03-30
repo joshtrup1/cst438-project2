@@ -68,6 +68,24 @@ exports.getItemByColor = (req,res) => {
         res.send(err);
     });
 };
+exports.getUsers = (req,res) => {
+    User.find().then((users) => {
+        res.json(users);
+    })
+    .catch((err) => {
+        res.send(err);
+    });
+};
+
+exports.getUserById = (req,res) => {
+    
+    User.findById(req.params.userId).then((user) => {
+        res.json(user);
+    })
+    .catch((err) => {
+        res.send(err);
+    });
+};
 
 exports.addItemToUserCart = (req,res) => {
     User.findOneAndUpdate({_id: req.params.userId}).then((user) => { 

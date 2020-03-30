@@ -1,51 +1,46 @@
 <%- include ("../partials/header") %>
-       
-        Filter Color: 
-        <div class="dropdown">
-            <button class="dropbtn">Select</button>
-            <div class="dropdown-content">
-              <a>Yellow</a>
-              <a>Red</a>
-              <a>Blue</a>
-              <a>Silver</a>
-              <a>Green</a>
-              <a>Orange</a>
-            </div>
-          </div>
-          <div id="filterPrice">
+
+
+            <h1 >
+                <figure id="h1" >
+                    <img src="https://fontmeme.com/permalink/200312/e3ac6f4df0a4deaaf01a1a140fb7df8d.png" alt="Picture Of Wizard King" style="width:800px;height:50px;" />
+                </figure>
+            </h1>
+        </header>
+        <hr/>
+        
+        <title>Welcome! <%=user.username %> </title>
+        
+        <nav>
+            <a href="/">Home:  <%=user.username %> </a>
+            <a href="/createAccount">Create Account</a>
+            <a href="/login">Login</a>
+            <a href="/newItem">Add New Item</a>
+            <a href="/updateItem">Update Item</a>
+            <a href="/lightsabers">Lightsabers</a>
+            <a href="/cart">Shopping Cart</a>
+        </nav>
+        <form action="/search">    
+        <h2>Filter Color:</h2>
+            <select name="color" class="selectpicker" id="colorSelector">
+              <option value="yellow">Yellow</option>
+              <option value="red">Red</option>
+              <option value="blue">Blue</option>
+              <option value="silver">Silver</option>
+              <option value="green"> Green</option>
+              <option value="orange">Orange</option>
+              <option value="chrome">Chrome</option>
+            </select>
             <h2>Filter Price</h2>
             <input type="number" id="price" name="price" min="0.00" step="1">
-          </div>    
-    <button id="filterSearch" value="submit">Submit</button>
-    
-    <br>
-    <br>
+ 
+        <button id="filterSearch" value="submit">Submit</button>
+  </form> 
+
     
     <div id="display_items">
-
+      
     </div>
     
-
-<script>
-    /* When the user clicks on the button, 
-    toggle between hiding and showing the dropdown content */
-    function myFunction() {
-      document.getElementById("myDropdown").classList.toggle("show");
-    }
-    
-    // Close the dropdown if the user clicks outside of it
-    window.onclick = function(event) {
-      if (!event.target.matches('.dropbtn')) {
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-          var openDropdown = dropdowns[i];
-          if (openDropdown.classList.contains('show')) {
-            openDropdown.classList.remove('show');
-          }
-        }
-      }
-    }
-    </script>
     
  <%- include ("../partials/footer") %>
