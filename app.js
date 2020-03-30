@@ -253,6 +253,7 @@ function flashUserData() {
 
 
 
+
 app.get('/lightsabers',isLoggedIn,(req,res) => {
     req.flash("username",req.user);
     
@@ -267,6 +268,7 @@ app.get('/lightsabers',isLoggedIn,(req,res) => {
     res.render("lightsabers",{item:items,user:req.user});
     // res.render("lightsabers");
 })
+
 
 
 
