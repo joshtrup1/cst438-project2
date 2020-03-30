@@ -7,7 +7,7 @@
            <span style="margin:auto; display:table; border:1px;">
                 <img src="https://vignette.wikia.nocookie.net/starwars/images/7/7f/Solo.JPG/revision/latest/scale-to-width-down/250?cb=20060324175108" style="padding-left:10px;float:left;"> 
                 <i style="float:left; padding-left:10px;"> 
-                    <form action="/updateItem" method="POST">
+                    <form id="UpdateItemValues">
                         <h2>
                             
                             <h3> Color: <input type="text" name="color"> </h3> <br>
@@ -15,15 +15,19 @@
                             <h3> Image URL:<input type="text" name="link"></h3> <br>
                             
                             <br><br>
-                            <button id="UpdateCurrentItem" class="myButton">Update Item</button>
+                            
                         
                             <%= typeof(message) != "undefined"?message:"" %>
                             
                         </h2>
                     </form>  
+                    <button id="UpdateCurrentItem" class="myButton">Update Item</button>
+                    <h1 id="confirm_update"></h1>
+                    <button><a href="/lightsabers">Back</a></button>
+
                 </i>
                 <img src="https://vignette.wikia.nocookie.net/starwars/images/7/7a/Chewbacca_004.jpg/revision/latest/scale-to-width-down/210?cb=20101219044516" style="margin-left:10px;float:left;">
             </span>            
         </div>
-        <script type="text/javascript" src="../public/COVID.js"></script>
+        
  <%- include ("../partials/footer") %>

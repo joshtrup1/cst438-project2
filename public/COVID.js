@@ -14,6 +14,7 @@ $(document).ready(function() {
         var id = $("#deleteItem").closest("div");
         // console.log($(this).parent());
         var clickParent = $(this).parent();
+        console.log(clickParent.data('id'))
         // console.log(clickParent.children('#deleteItem').attr('class'));
         removeItem(clickParent);
     });
@@ -71,7 +72,7 @@ function getItems() {
             var price = $("<p>Price: $" + element.price + "</p><br>");
             var link = $("<img style='width:200px;height:200px;' src=" + element.link +"><br>");
             var updateBTN = $("<button><a href='/updateItem/" + element._id + "'> Update </a></button></div>");
-            var deleteBTN = $("<button id='deleteItem'>delete </button></div>");
+            var deleteBTN = $("<button class = '" + element._id + "'  id='deleteItem'>delete </button></div>");
             var addToCartBTN = $("<button>Add to Cart </button></div><br><br>");
             divItem.append(link,color,price,updateBTN,deleteBTN, addToCartBTN);
             $('#display_items').append(divItem);
@@ -169,6 +170,7 @@ const updateItem = (item) => {
 
     })
     .then(function(updateItem) {
+        $("#confirm_update").text("Item has been created");
         console.log("Updated");
     })
 
