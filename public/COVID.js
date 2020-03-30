@@ -8,12 +8,14 @@ $(document).ready(function() {
           });
           return dataObj;
     }
+
     //Delete
     $(document).on('click','#deleteItem',function() {
         
         var id = $("#deleteItem").closest("div");
         // console.log($(this).parent());
         var clickParent = $(this).parent();
+        console.log(clickParent.data('id'))
         // console.log(clickParent.children('#deleteItem').attr('class'));
         removeItem(clickParent);
     });
@@ -21,12 +23,9 @@ $(document).ready(function() {
     $(document).on('click','#UpdateCurrentItem',function() {
         
         var updateInputValues = $("#UpdateItemValues").serializeArray()
-        dataObj = {};
-        $(updateInputValues).each(function(i, field){
-          dataObj[field.name] = field.value;
-        });
-        console.log(updateInputValues);
-        console.log(dataObj);
+        var parseData = parseSerializedInput(updateInputValues)
+        console.log(parseData);
+        
         updateItem(dataObj);
     });
 
@@ -71,7 +70,7 @@ function getItems() {
             var price = $("<p>Price: $" + element.price + "</p><br>");
             var link = $("<img style='width:200px;height:200px;' src=" + element.link +"><br>");
             var updateBTN = $("<button><a href='/updateItem/" + element._id + "'> Update </a></button></div>");
-            var deleteBTN = $("<button id='deleteItem'>delete </button></div>");
+            var deleteBTN = $("<button class = '" + element._id + "'  id='deleteItem'>delete </button></div>");
             var addToCartBTN = $("<button>Add to Cart </button></div><br><br>");
             divItem.append(link,color,price,updateBTN,deleteBTN, addToCartBTN);
             $('#display_items').append(divItem);
@@ -84,6 +83,7 @@ function getItems() {
 }
 
 function getItemsBySearch(searchItems) {
+    $('#displaySearchResult').empty()
     var searchURL = "/api/items/search?" + searchItems;
     $.ajax({
         method: 'GET',
@@ -152,13 +152,13 @@ function removeItem(item) {
 
 const updateItem = (item) => {
     var updateUrl = '/api/items/' + item.id;
-    var itemName = item.name;
+
     var itemColor = item.color;
     var itemPrice = item.price;
-    var itemQuantity = item.quantity;
+    var itemLink = item.link;
     // console.log(item);
 
-    var updateData = {name:itemName,color: itemColor, price: itemPrice, quantity: itemQuantity};
+    var updateData = {color: itemColor, price: itemPrice,link:itemLink};
     // console.log(updateData)
     console.log(updateData);
     $.ajax({
@@ -168,6 +168,7 @@ const updateItem = (item) => {
 
     })
     .then(function(updateItem) {
+        $("#confirm_update").text("Item has been created");
         console.log("Updated");
     })
 
