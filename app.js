@@ -120,7 +120,7 @@ app.get("/removeFromCart/:itemId",(req,res) => {
                 console.log(err);
             }
             user.itemsInCart.push(item);
-            res.json(item)
+            res.json({message: "item Added to Cart"})
             console.log(item)
             
         });
@@ -219,6 +219,22 @@ app.get("/cart",(req,res)=> {
 app.get('/updateItem',(req,res)=> {
     var userData = flashUserData()
     res.render("updateItem",{user:userData});
+
+});
+
+app.get('/updateItem/:itemId',(req,res)=> {
+    let userData = req.flash('username');
+    let parsedUserData = JSON.parse(JSON.stringify(userData[0]))
+    Item.findById(req.params.itemId).exec(function(err,foundItem) {
+        if(err) {
+            console.log(err);
+        }
+        else {
+            console.log(foundItem.price)
+            res.render("updateItem",{item: foundItem,user:parsedUserData});
+
+        }
+    });
 
 });
 
