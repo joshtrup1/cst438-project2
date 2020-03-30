@@ -60,10 +60,11 @@ function getItems() {
         data.forEach((element,index) => {
             var divItem = $("<div id='" + element._id + "'></div>");
             var color = $("<p>color: " +element.color + "</p>");
-            var price = $("<p>$" + element.price + "</p>");
+            var price = $("<p>$" + element.price + "</p><br>");
+            var link = $("<img src=" + element.link +">$<br>");
             var updateBTN = $("<button><a href='/updateItem/" + element._id + "'> Update </a></button></div>");
             var deleteBTN = $("<button id='deleteItem'>delete </button></div>");
-            divItem.append(color,price,updateBTN,deleteBTN);
+            divItem.append(color,price, link,updateBTN,deleteBTN);
             $('#display_items').append(divItem);
         });
         
