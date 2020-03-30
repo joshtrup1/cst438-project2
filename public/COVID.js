@@ -71,7 +71,7 @@ function getItems() {
             var link = $("<img style='width:200px;height:200px;' src=" + element.link +"><br>");
             var updateBTN = $("<button><a href='/updateItem/" + element._id + "'> Update </a></button></div>");
             var deleteBTN = $("<button class = '" + element._id + "'  id='deleteItem'>delete </button></div>");
-            var addToCartBTN = $("<button>Add to Cart </button></div><br><br>");
+            var addToCartBTN = $("<button><a href='/addItemToCart/" + element._id + "'> Add to Cart </a></button></div><br><br>");
             divItem.append(link,color,price,updateBTN,deleteBTN, addToCartBTN);
             $('#display_items').append(divItem);
         });
