@@ -59,12 +59,13 @@ function getItems() {
     .done((data) => {
         data.forEach((element,index) => {
             var divItem = $("<div id='" + element._id + "'></div>");
-            var color = $("<p>color: " +element.color + "</p>");
-            var price = $("<p>$" + element.price + "</p><br>");
-            var link = $("<img src=" + element.link +">$<br>");
+            var color = $("<p>Color: " +element.color + "</p>");
+            var price = $("<p>Price: $" + element.price + "</p><br>");
+            var link = $("<img src=" + element.link +"><br>");
             var updateBTN = $("<button><a href='/updateItem/" + element._id + "'> Update </a></button></div>");
             var deleteBTN = $("<button id='deleteItem'>delete </button></div>");
-            divItem.append(color,price, link,updateBTN,deleteBTN);
+            var addToCartBTN = $("<button>Add to Cart </button></div><br><br>");
+            divItem.append(link,color,price,updateBTN,deleteBTN, addToCartBTN);
             $('#display_items').append(divItem);
         });
         
