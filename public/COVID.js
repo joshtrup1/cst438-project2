@@ -61,7 +61,7 @@ function getItems() {
             var divItem = $("<div id='" + element._id + "'></div>");
             var color = $("<p>color: " +element.color + "</p>");
             var price = $("<p>$" + element.price + "</p>");
-            var updateBTN = $("<button><a href='/updateLightsaber/" + element._id + "'> Update </a></button></div>");
+            var updateBTN = $("<button><a href='/updateItem/" + element._id + "'> Update </a></button></div>");
             var deleteBTN = $("<button id='deleteItem'>delete </button></div>");
             divItem.append(color,price,updateBTN,deleteBTN);
             $('#display_items').append(divItem);

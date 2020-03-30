@@ -201,14 +201,14 @@ app.get('/createLightsaber',(req,res)=> {
 });
 
 app.get('/updateItem',(req,res)=> {
-    res.render("updateLightsaber");
+    res.render("updateItem");
 
 });
 
-app.get('/deleteLightsaber',(req,res)=> {
-    res.render("updateLightsaber");
+// app.get('/deleteLightsaber',(req,res)=> {
+//     res.render("updateItem");
 
-});
+// });
 
 
 app.get('/thankYou',(req,res)=> {
@@ -219,7 +219,7 @@ app.get('/thankYou',(req,res)=> {
 
 
 
-//API Routes============================
+// Routes============================
 
 app.get('/lightsabers',isLoggedIn,(req,res) => {
     req.flash("username",req.user);
