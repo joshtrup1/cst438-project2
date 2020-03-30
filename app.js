@@ -90,6 +90,19 @@ app.get("/search",(req,res) => {
 
 })
 
+app.get("/addToCart/:itemId",(req,res) => {
+    Item.find(req.query,(err,item) => {
+        if(err) {
+            console.log(err);
+        }
+        res.json(item)
+        console.log(item)
+        
+    });
+
+})
+
+
 //login
 
 app.get("/login",(req,res) => {
@@ -223,6 +236,7 @@ app.get('/thankYou',(req,res)=> {
 
 app.get('/lightsabers',isLoggedIn,(req,res) => {
     req.flash("username",req.user);
+    
     let items = Item.find()
     .then((items) => {
         res.json(items);

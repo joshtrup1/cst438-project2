@@ -62,7 +62,7 @@ function getItems() {
             var color = $("<p>color: " +element.color + "</p>");
             var price = $("<p>$" + element.price + "</p>");
             var updateBTN = $("<button><a href='/updateLightsaber/" + element._id + "'> Update </a></button></div>");
-            var deleteBTN = $("<button id='deleteItem'>delete </button></div>");
+            var deleteBTN = $("<button class='" + element._id + "' id='deleteItem'>delete </button></div>");
             divItem.append(color,price,updateBTN,deleteBTN);
             $('#display_items').append(divItem);
         });
@@ -107,7 +107,8 @@ function createItem(item) {
 }
 
 function removeItem(item) {
-    var deleteID = item.children('#deleteItem').attr('class')
+    var deleteID = item.children('#deleteItem').attr('class');
+    console.log(deleteID);
     var deleterUrl = 'api/items/'+ deleteID;
     console.log(item);
     
