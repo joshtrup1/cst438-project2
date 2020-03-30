@@ -65,6 +65,7 @@ app.post("/createAccount",(req,res)=> {
         if(err) {
             console.log(err);
 
+          
             return res.render("createAccount");
         }
         passport.authenticate("local")(req,res,() => {
@@ -252,8 +253,6 @@ function flashUserData() {
 
 
 
-// These are not API Routes============================
-
 app.get('/lightsabers',isLoggedIn,(req,res) => {
     req.flash("username",req.user);
     
@@ -269,25 +268,7 @@ app.get('/lightsabers',isLoggedIn,(req,res) => {
     // res.render("lightsabers");
 })
 
-app.put('/lightsaber/:itemID',(req,res) => {
-    
-    Item.findOneAndUpdate({_id: req.params.todoId},req.body,{new:true})
-    .then((todo) => {
-        res.json(todo);
-    })
-    .catch((err) => {
-        res.send(err);
-    });
-});
 
-app.delete("/lightsaber/:itemID",(req,res) => {
-    Item.remove({_id: req.params.todoId}).then(() => {
-        res.json({message: "we deleted it"});
-    })
-    .catch((err) => {
-        res.send(err);
-    });
-})
 
 
 //SERVER PORT
