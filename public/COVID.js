@@ -66,15 +66,10 @@ function getItems() {
         data.forEach((element,index) => {
             var divItem = $("<div id='" + element._id + "'></div>");
 
-            // var color = $("<p>color: " +element.color + "</p>");
-            // var price = $("<p>$" + element.price + "</p>");
-            // var updateBTN = $("<button><a href='/updateLightsaber/" + element._id + "'> Update </a></button></div>");
-            // var deleteBTN = $("<button class='" + element._id + "' id='deleteItem'>delete </button></div>");
-            // divItem.append(color,price,updateBTN,deleteBTN);
 
             var color = $("<p>Color: " +element.color + "</p>");
             var price = $("<p>Price: $" + element.price + "</p><br>");
-            var link = $("<img src=" + element.link +"><br>");
+            var link = $("<img style='width:200px;height:200px;' src=" + element.link +"><br>");
             var updateBTN = $("<button><a href='/updateItem/" + element._id + "'> Update </a></button></div>");
             var deleteBTN = $("<button id='deleteItem'>delete </button></div>");
             var addToCartBTN = $("<button>Add to Cart </button></div><br><br>");
@@ -89,14 +84,21 @@ function getItems() {
 }
 
 function getItemsBySearch(searchItems) {
-    var searchURL = "/api/items/search?" + searchItems
+    var searchURL = "/api/items/search?" + searchItems;
     $.ajax({
         method: 'GET',
         url: searchURL,
     })
     .then((data) => {
-        console.log(data);
+        var color = $("<p>Color: " + data[0].color + "</p>");
+        var price = $("<p>Price: $" + data[0].price + "</p><br>");
+        var link = $("<img style='width:100px;height:100px;' src=" + data[0].link +"><br>");
+        $('#displaySearchResult').append(price,color,link);
+        console.log(data[0].price);
     })
+    
+
+    
 
 }
 function addItem(item) {
