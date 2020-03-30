@@ -6,7 +6,7 @@ itemSchema = new mongoose.Schema({
     quantity: Number,
     description: String,
     color: String,
-    price: mongoose.Decimal128,
+    price: String,
     isAvailable: {
         type: Boolean,
         default: true
