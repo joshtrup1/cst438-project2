@@ -274,7 +274,8 @@ app.get('/lightsabers',isLoggedIn,(req,res) => {
 //ADD to cart 
 
 app.get("/addItemToCart/:itemId",(req,res) => {
-    var userData = flashUserData();
+    let userData = req.flash('username');
+    let parsedUserData = JSON.parse(JSON.stringify(userData[0]))
     console.log(userData)
     User.findById(userData._id,(err,user) => {
         if(err) {
