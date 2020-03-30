@@ -168,7 +168,7 @@ const updateItem = (item) => {
 
     })
     .then(function(updateItem) {
-        $("#confirm_update").text("Item has been created");
+        $("#confirm_update").text("Item has been updated");
         console.log("Updated");
     })
 
