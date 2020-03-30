@@ -193,33 +193,9 @@ app.get("/cart",(req,res)=> {
     res.render("cart");
     
 });
-
-
-app.get('/createLightsaber',(req,res)=> {
-    req.flash('')
-    res.render("newItem",{user:req.User});
-    console.log("user is with us");
-    console.log(req.user)
-});
-
+// render update item page
 app.get('/updateItem',(req,res)=> {
     res.render("updateItem");
-
-});
-
-app.get('/createLightsaber',(req,res)=> {
-    res.render("newItem",{user:req.User});
-    console.log("user is with us");
-    console.log(req.user)
-});
-
-app.get('/updateItem',(req,res)=> {
-    res.render("updateLightsaber");
-
-});
-
-app.get('/deleteLightsaber',(req,res)=> {
-    res.render("updateLightsaber");
 
 });
 
@@ -232,7 +208,38 @@ app.get('/thankYou',(req,res)=> {
 
 
 
-//API Routes============================
+
+
+
+// app.get('/createLightsaber',(req,res)=> {
+//     req.flash('')
+//     res.render("newItem",{user:req.User});
+//     console.log("user is with us");
+//     console.log(req.user)
+// });
+
+
+
+// app.get('/createLightsaber',(req,res)=> {
+//     res.render("newItem",{user:req.User});
+//     console.log("user is with us");
+//     console.log(req.user)
+// });
+
+
+
+// app.get('/deleteLightsaber',(req,res)=> {
+//     res.render("updateItem");
+
+// });
+
+
+
+
+
+
+
+// Routes============================
 
 app.get('/lightsabers',isLoggedIn,(req,res) => {
     req.flash("username",req.user);

@@ -1,27 +1,7 @@
 <%- include ("../partials/header") %>
 
-
-            <h1 >
-                <figure id="h1" >
-                    <img src="https://fontmeme.com/permalink/200312/e3ac6f4df0a4deaaf01a1a140fb7df8d.png" alt="Picture Of Wizard King" style="width:800px;height:50px;" />
-                </figure>
-            </h1>
-        </header>
-        <hr/>
-        
-        <title>Welcome! <%=user.username %> </title>
-        
-        <nav>
-            <a href="/">Home:  <%=user.username %> </a>
-            <a href="/createAccount">Create Account</a>
-            <a href="/login">Login</a>
-            <a href="/newItem">Add New Item</a>
-            <a href="/updateItem">Update Item</a>
-            <a href="/lightsabers">Lightsabers</a>
-            <a href="/cart">Shopping Cart</a>
-        </nav>
         <form action="/search">    
-        <h2>Filter Color:</h2>
+        <h3>Filter Color:</h3>
             <select name="color" class="selectpicker" id="colorSelector">
               <option value="yellow">Yellow</option>
               <option value="red">Red</option>
@@ -31,12 +11,15 @@
               <option value="orange">Orange</option>
               <option value="chrome">Chrome</option>
             </select>
-            <h2>Filter Price</h2>
+            <h3>Filter Price</h3>
             <input type="number" id="price" name="price" min="0.00" step="1">
  
-        <button id="filterSearch" value="submit">Submit</button>
+        <button class"myButton" id="filterSearch" value="submit">Submit</button>
   </form> 
-
+  
+  <br><br>
+  <h3>Products:</h3>
+  <br>
     
     <div id="display_items">
       
