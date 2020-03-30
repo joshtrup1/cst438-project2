@@ -65,6 +65,7 @@ app.post("/createAccount",(req,res)=> {
         if(err) {
             console.log(err);
 
+          
             return res.render("createAccount");
         }
         passport.authenticate("local")(req,res,() => {
@@ -253,7 +254,6 @@ function flashUserData() {
 
 
 
-
 app.get('/lightsabers',isLoggedIn,(req,res) => {
     req.flash("username",req.user);
     
@@ -270,54 +270,6 @@ app.get('/lightsabers',isLoggedIn,(req,res) => {
 })
 
 
-
-
-
-//ADD to cart 
-
-app.get("/addItemToCart/:itemId",(req,res) => {
-    var userData = flashUserData();
-    console.log(userData)
-    User.findById(userData._id,(err,user) => {
-        if(err) {
-            console.log(err)
-        }
-        else {
-           Item.findById(req.params.itemId,(err,item) => {
-               if(err) {
-                   console.log(err)
-               } else {
-                   user.itemsInCart.push(item)
-               }
-
-           }) 
-        }
-
-    })
-
-})
-
-app.get("/addItemToCart/:itemId",(req,res) => {
-    var userData = flashUserData();
-    console.log(userData)
-    User.findById(userData._id,(err,user) => {
-        if(err) {
-            console.log(err)
-        }
-        else {
-           Item.findById(req.params.itemId,(err,item) => {
-               if(err) {
-                   console.log(err)
-               } else {
-                   user.itemsInCart.pull(item)
-               }
-
-           }) 
-        }
-
-    })
-
-})
 
 
 
