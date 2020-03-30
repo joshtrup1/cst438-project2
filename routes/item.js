@@ -17,7 +17,6 @@ router.route('/:itemId')
     .get(helpers.getItemById)
     .put(helpers.updateItem)
     .delete(helpers.deleteItem)
-    .get(helpers.getBySearch)
 
 router.route('/user')
     .get(helpers.getUsers)

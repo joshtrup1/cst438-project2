@@ -8,6 +8,7 @@ $(document).ready(function() {
           });
           return dataObj;
     }
+
     //Delete
     $(document).on('click','#deleteItem',function() {
         
@@ -22,12 +23,9 @@ $(document).ready(function() {
     $(document).on('click','#UpdateCurrentItem',function() {
         
         var updateInputValues = $("#UpdateItemValues").serializeArray()
-        dataObj = {};
-        $(updateInputValues).each(function(i, field){
-          dataObj[field.name] = field.value;
-        });
-        console.log(updateInputValues);
-        console.log(dataObj);
+        var parseData = parseSerializedInput(updateInputValues)
+        console.log(parseData);
+        
         updateItem(dataObj);
     });
 
@@ -154,13 +152,13 @@ function removeItem(item) {
 
 const updateItem = (item) => {
     var updateUrl = '/api/items/' + item.id;
-    var itemName = item.name;
+
     var itemColor = item.color;
     var itemPrice = item.price;
-    var itemQuantity = item.quantity;
+    var itemLink = item.link;
     // console.log(item);
 
-    var updateData = {name:itemName,color: itemColor, price: itemPrice, quantity: itemQuantity};
+    var updateData = {color: itemColor, price: itemPrice,link:itemLink};
     // console.log(updateData)
     console.log(updateData);
     $.ajax({
