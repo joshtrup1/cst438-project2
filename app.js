@@ -252,22 +252,22 @@ function flashUserData() {
 
 
 
-// Routes============================
+// These are not API Routes============================
 
-// app.get('/lightsabers',isLoggedIn,(req,res) => {
-//     req.flash("username",req.user);
+app.get('/lightsabers',isLoggedIn,(req,res) => {
+    req.flash("username",req.user);
     
-//     let items = Item.find()
-//     .then((items) => {
-//         res.json(items);
+    let items = Item.find()
+    .then((items) => {
+        res.json(items);
     
-//     })
-//     .catch((err) => {
-//         res.send(err);
-//     })
-//     res.render("lightsabers",{item:items,user:req.user});
-//     // res.render("lightsabers");
-// })
+    })
+    .catch((err) => {
+        res.send(err);
+    })
+    res.render("lightsabers",{item:items,user:req.user});
+    // res.render("lightsabers");
+})
 
 // app.put('/lightsaber/:itemID',(req,res) => {
     

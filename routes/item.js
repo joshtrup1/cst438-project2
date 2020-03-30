@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var helpers = require('../helpers/items');
+var helpers = require('../helper/items');
 
 //http://localhost:1407/api/items/5e8118df2a50ed0bf00ab1555e81/user/5e7c3643134187f54d67e187
 

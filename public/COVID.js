@@ -42,6 +42,13 @@ $(document).ready(function() {
 
     });
 
+    $(document).on('click',"#filterSearch",function() {
+        var searchData = $("#searchQueryValues").serialize()
+        // console.log(searchData);
+        
+        getItemsBySearch(searchData)
+    })
+
     
 
     getItems();
@@ -82,6 +89,17 @@ function getItems() {
     })
 }
 
+function getItemsBySearch(searchItems) {
+    var searchURL = "/api/items/search?" + searchItems
+    $.ajax({
+        method: 'GET',
+        url: searchURL,
+    })
+    .then((data) => {
+        console.log(data);
+    })
+
+}
 function addItem(item) {
     var newItem = item.name;
     newItem.data('id',item._id);
