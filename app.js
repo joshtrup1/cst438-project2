@@ -65,6 +65,7 @@ app.post("/createAccount",(req,res)=> {
         if(err) {
             console.log(err);
 
+          
             return res.render("createAccount");
         }
         passport.authenticate("local")(req,res,() => {
@@ -291,7 +292,7 @@ app.get("/addItemToCart/:itemId",(req,res) => {
 
 })
 
-app.get("/addItemToCart/:itemId",(req,res) => {
+app.get("/removeFromCart/:itemId",(req,res) => {
     var userData = flashUserData();
     console.log(userData)
     User.findById(userData._id,(err,user) => {
@@ -313,6 +314,7 @@ app.get("/addItemToCart/:itemId",(req,res) => {
     })
 
 })
+
 
 
 
