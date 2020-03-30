@@ -2,11 +2,12 @@ var mongoose = require('mongoose');
 
 
 itemSchema = new mongoose.Schema({
-    name:String,
-    quantity: Number,
-    description: String,
+    // name:String,
+    // quantity: Number,
+    // description: String,
     color: String,
     price: String,
+    link: String,
     isAvailable: {
         type: Boolean,
         default: true
